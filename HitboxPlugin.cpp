@@ -77,7 +77,7 @@ void HitboxPlugin::OnHitboxOnValueChanged(std::string oldValue, CVarWrapper cvar
 {
 	int ingame = (gameWrapper->IsInReplay()) ? 2 : ((gameWrapper->IsInOnlineGame()) ? 0 : ((gameWrapper->IsInGame()) ? 1 : 0));
 	//cvarManager->log("OnHitboxValueChanged: " + std::to_string(ingame));
-	if (cvar.getIntValue() & ingame) {
+	if (cvar.getIntValue() & true) {
 		OnFreeplayLoad("Load");
 	}
 	else
@@ -130,9 +130,9 @@ void HitboxPlugin::OnHitboxTypeChanged(std::string oldValue, CVarWrapper cvar) {
 void HitboxPlugin::Render(CanvasWrapper canvas)
 {
 	int ingame = (gameWrapper->IsInGame()) ? 1 : (gameWrapper->IsInReplay()) ? 2 : 0;
-	if (*hitboxOn & ingame)
+	if (*hitboxOn & true)
 	{
-		if (gameWrapper->IsInOnlineGame() && ingame != 2) return;
+		//if (gameWrapper->IsInOnlineGame() && ingame != 2) return;
 		ServerWrapper game = (ingame == 1) ? gameWrapper->GetGameEventAsServer() : gameWrapper->GetGameEventAsReplay();
 		if (game.IsNull())
 			return;
